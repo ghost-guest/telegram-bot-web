@@ -1,0 +1,94 @@
+.upload-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.upload-result {
+  max-width: 500px;
+  margin: 30px auto 0;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.upload-result h3 {
+  color: #28a745;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.filename {
+  font-weight: 600;
+  color: #333;
+  word-break: break-all;
+  text-align: center;
+}
+
+.share-link {
+  display: flex;
+  gap: 10px;
+}
+
+.link-input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f5f5f5;
+}
+
+.copy-btn {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #0056b3;
+}
+
+.view-link {
+  display: block;
+  text-align: center;
+  padding: 12px;
+  background: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.view-link:hover {
+  background: #218838;
+}
