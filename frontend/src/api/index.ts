@@ -1,6 +1,19 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+// 在生产环境使用当前域名，开发环境使用 localhost
+const getApiBase = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  // 生产环境：使用当前页面的域名
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+    return window.location.origin;
+  }
+  // 开发环境
+  return 'http://localhost:8080';
+};
+
+const API_BASE = getApiBase();
 
 const api = axios.create({
   baseURL: `${API_BASE}/api`,
