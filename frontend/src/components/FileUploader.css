@@ -1,118 +1,262 @@
 .uploader {
   max-width: 500px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 30px rgba(0, 255, 255, 0.1),
+    inset 0 0 60px rgba(0, 255, 255, 0.03);
 }
 
 .upload-tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .tab {
   flex: 1;
-  padding: 10px 20px;
-  border: 2px solid #e0e0e0;
-  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  background: rgba(0, 255, 255, 0.05);
   border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
+  font-size: 13px;
+  font-family: 'Courier New', 'Monaco', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
 }
 
 .tab:hover {
-  border-color: #007bff;
+  border-color: rgba(0, 255, 255, 0.6);
+  background: rgba(0, 255, 255, 0.1);
+  color: #0ff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
 }
 
 .tab.active {
-  background: #007bff;
-  border-color: #007bff;
-  color: white;
+  background: rgba(0, 255, 255, 0.15);
+  border-color: #0ff;
+  color: #0ff;
+  box-shadow:
+    0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.tab-icon {
+  font-size: 16px;
 }
 
 .drop-zone {
-  border: 2px dashed #ccc;
+  position: relative;
+  border: 2px dashed rgba(0, 255, 255, 0.4);
   border-radius: 12px;
-  padding: 40px 20px;
+  padding: 50px 20px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s;
-  background: #fafafa;
+  transition: all 0.3s ease;
+  background:
+    linear-gradient(135deg, rgba(0, 255, 255, 0.02) 0%, transparent 50%),
+    rgba(0, 20, 40, 0.5);
+  overflow: hidden;
+}
+
+.drop-zone::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(0, 255, 255, 0.03) 50%, transparent 100%);
+  animation: shimmer 3s infinite;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0ff, transparent);
+  animation: scan 2s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { top: 100%; opacity: 0; }
 }
 
 .drop-zone:hover,
 .drop-zone.drag-active {
-  border-color: #007bff;
-  background: #f0f7ff;
+  border-color: #0ff;
+  background:
+    linear-gradient(135deg, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+    rgba(0, 30, 60, 0.6);
+  box-shadow:
+    0 0 30px rgba(0, 255, 255, 0.2),
+    inset 0 0 30px rgba(0, 255, 255, 0.05);
+}
+
+.drop-zone.has-file {
+  border-style: solid;
+  border-color: #0f0;
 }
 
 .drop-label {
   display: block;
   cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
 
 .drop-message {
-  color: #666;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.drop-message .icon {
-  font-size: 48px;
+.upload-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  color: #0ff;
+  opacity: 0.8;
+}
+
+.upload-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.drop-text {
   display: block;
-  margin-bottom: 10px;
+  font-size: 16px;
+  font-family: 'Courier New', monospace;
+  color: #0ff;
+  margin-bottom: 8px;
+}
+
+.drop-subtext {
+  display: block;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Courier New', monospace;
 }
 
 .file-info {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-icon {
+  font-size: 40px;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.5));
 }
 
 .file-name {
   font-weight: 600;
-  color: #333;
+  color: #0f0;
   word-break: break-all;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 .file-size {
-  color: #666;
+  color: rgba(0, 255, 255, 0.8);
   font-size: 14px;
+  font-family: 'Courier New', monospace;
+}
+
+.text-input-wrapper {
+  position: relative;
 }
 
 .text-input {
   width: 100%;
-  padding: 15px;
-  border: 2px solid #e0e0e0;
+  padding: 16px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
   border-radius: 8px;
   font-size: 14px;
   resize: vertical;
-  font-family: inherit;
+  font-family: 'Courier New', monospace;
   box-sizing: border-box;
+  background: rgba(0, 20, 40, 0.6);
+  color: #fff;
+  line-height: 1.6;
+}
+
+.text-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .text-input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #0ff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.text-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  font-size: 11px;
+  color: rgba(0, 255, 255, 0.5);
+  font-family: 'Courier New', monospace;
 }
 
 .description-input {
   width: 100%;
-  padding: 12px 15px;
-  border: 2px solid #e0e0e0;
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
   border-radius: 8px;
   font-size: 14px;
-  margin-top: 15px;
+  margin-top: 16px;
   box-sizing: border-box;
+  background: rgba(0, 20, 40, 0.6);
+  color: #fff;
+  font-family: 'Courier New', monospace;
+}
+
+.description-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .description-input:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: #0ff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.progress-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .progress-bar {
-  margin-top: 15px;
-  background: #e0e0e0;
+  flex: 1;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.3);
   border-radius: 10px;
   height: 20px;
   position: relative;
@@ -121,39 +265,98 @@
 
 .progress {
   height: 100%;
-  background: linear-gradient(90deg, #007bff, #0056b3);
+  background: linear-gradient(90deg, #0ff, #0f0);
   transition: width 0.3s;
+  position: relative;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+  animation: glow-move 1s ease-in-out infinite;
+}
+
+@keyframes glow-move {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
 }
 
 .progress-text {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: #0ff;
+  font-family: 'Courier New', monospace;
+  min-width: 45px;
+  text-align: right;
 }
 
 .upload-btn {
   width: 100%;
-  padding: 15px;
-  background: #007bff;
-  color: white;
-  border: none;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.1));
+  border: 1px solid #0ff;
+  color: #0ff;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   margin-top: 20px;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.upload-btn:hover:not(:disabled)::before {
+  left: 100%;
 }
 
 .upload-btn:hover:not(:disabled) {
-  background: #0056b3;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(0, 255, 255, 0.2));
+  box-shadow:
+    0 0 30px rgba(0, 255, 255, 0.4),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  transform: translateY(-2px);
 }
 
 .upload-btn:disabled {
-  background: #ccc;
+  background: rgba(100, 100, 100, 0.2);
+  border-color: rgba(100, 100, 100, 0.3);
+  color: rgba(100, 100, 100, 0.5);
   cursor: not-allowed;
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-icon {
+  font-size: 18px;
+  transition: transform 0.3s;
+}
+
+.upload-btn:hover:not(:disabled) .btn-icon {
+  transform: translateX(5px);
 }

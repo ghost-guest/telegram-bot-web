@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { uploadFile, uploadText } from '../api';
 import type { UploadResponse } from '../api';
+import { useI18n } from '../i18n';
 import './FileUploader.css';
 
 interface FileUploaderProps {
@@ -8,6 +9,7 @@ interface FileUploaderProps {
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({ onUploadSuccess }) => {
+  const { t } = useI18n();
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState('');
   const [textContent, setTextContent] = useState('');
@@ -87,19 +89,21 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onUploadSuccess }) => {
           className={`tab ${uploadType === 'file' ? 'active' : ''}`}
           onClick={() => setUploadType('file')}
         >
-          File Upload
+          <span className="tab-icon">📁</span>
+          {t('fileUpload')}
         </button>
         <button
           className={`tab ${uploadType === 'text' ? 'active' : ''}`}
           onClick={() => setUploadType('text')}
         >
-          Text Upload
+          <span className="tab-icon">📝</span>
+          {t('textUpload')}
         </button>
       </div>
 
       {uploadType === 'file' ? (
         <div
-          className={`drop-zone ${dragActive ? 'drag-active' : ''}`}
+          className={`drop-zone ${dragActive ? 'drag-active' : ''} ${file ? 'has-file' : ''}`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
@@ -114,38 +118,53 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onUploadSuccess }) => {
           <label htmlFor="file-input" className="drop-label">
             {file ? (
               <div className="file-info">
+                <div className="file-icon">📄</div>
                 <span className="file-name">{file.name}</span>
                 <span className="file-size">{formatFileSize(file.size)}</span>
               </div>
             ) : (
               <div className="drop-message">
-                <span className="icon">📁</span>
-                <span>Drag & drop file here or click to select</span>
+                <div className="upload-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M12 16V4m0 0L8 8m4-4l4 4" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 20h18" strokeLinecap="round"/>
+                  </svg>
+                </div>
+                <span className="drop-text">{t('dropMessage')}</span>
+                <span className="drop-subtext">{t('orClick')}</span>
               </div>
             )}
           </label>
+          <div className="scan-line"></div>
         </div>
       ) : (
-        <textarea
-          className="text-input"
-          placeholder="Enter your text content here..."
-          value={textContent}
-          onChange={(e) => setTextContent(e.target.value)}
-          rows={8}
-        />
+        <div className="text-input-wrapper">
+          <textarea
+            className="text-input"
+            placeholder={t('textPlaceholder')}
+            value={textContent}
+            onChange={(e) => setTextContent(e.target.value)}
+            rows={8}
+          />
+          <div className="text-counter">{textContent.length} chars</div>
+        </div>
       )}
 
       <input
         type="text"
         className="description-input"
-        placeholder="Description (optional)"
+        placeholder={t('descriptionPlaceholder')}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
 
       {uploading && (
-        <div className="progress-bar">
-          <div className="progress" style={{ width: `${progress}%` }} />
+        <div className="progress-container">
+          <div className="progress-bar">
+            <div className="progress" style={{ width: `${progress}%` }}>
+              <div className="progress-glow"></div>
+            </div>
+          </div>
           <span className="progress-text">{progress}%</span>
         </div>
       )}
@@ -155,7 +174,8 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onUploadSuccess }) => {
         onClick={handleUpload}
         disabled={uploading || (uploadType === 'file' ? !file : !textContent)}
       >
-        {uploading ? 'Uploading...' : 'Upload'}
+        <span className="btn-text">{uploading ? t('uploading') : t('uploadBtn')}</span>
+        <span className="btn-icon">→</span>
       </button>
     </div>
   );

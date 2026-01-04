@@ -1,77 +1,233 @@
 .preview-page {
   min-height: 100vh;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 30px 20px;
+  background: #0a0e17;
+  position: relative;
+  overflow: hidden;
 }
 
-.loading {
-  color: white;
-  font-size: 24px;
+.cyber-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particles::before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #0ff;
+  border-radius: 50%;
+  box-shadow:
+    100vw 20vh 0 0 rgba(0, 255, 255, 0.3),
+    20vw 80vh 0 0 rgba(0, 255, 255, 0.5),
+    80vw 10vh 0 0 rgba(0, 255, 255, 0.4),
+    40vw 60vh 0 0 rgba(0, 255, 255, 0.2),
+    60vw 40vh 0 0 rgba(0, 255, 255, 0.6);
+  animation: float 15s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0ff;
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 6px;
+  background: rgba(0, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  border-color: #0ff;
+  background: rgba(0, 255, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.back-btn span {
+  transition: transform 0.3s;
+}
+
+.back-btn:hover span {
+  transform: translateX(-3px);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  position: relative;
+  z-index: 1;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 3px solid rgba(0, 255, 255, 0.2);
+  border-top-color: #0ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  color: #0ff;
+  margin-top: 20px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .error-card {
-  background: white;
+  background: rgba(10, 15, 30, 0.9);
+  border: 1px solid rgba(255, 100, 100, 0.4);
   border-radius: 16px;
-  padding: 40px;
+  padding: 50px 40px;
   text-align: center;
-  max-width: 400px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  margin: 100px auto;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 30px rgba(255, 100, 100, 0.1);
 }
 
 .error-icon {
   font-size: 64px;
-  display: block;
   margin-bottom: 20px;
+  color: #ff6b6b;
+  text-shadow: 0 0 20px rgba(255, 100, 100, 0.5);
 }
 
 .error-card h2 {
-  color: #333;
-  margin-bottom: 10px;
+  color: #ff6b6b;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
 }
 
 .error-card p {
-  color: #666;
-  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Courier New', monospace;
+  margin-bottom: 30px;
+  font-size: 14px;
 }
 
-.back-link {
+.error-card .back-link {
   display: inline-block;
-  padding: 12px 24px;
-  background: #007bff;
-  color: white;
+  padding: 14px 28px;
+  background: rgba(0, 255, 255, 0.15);
+  border: 1px solid #0ff;
+  color: #0ff;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.error-card .back-link:hover {
+  background: rgba(0, 255, 255, 0.25);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
 }
 
 .preview-card {
-  background: white;
+  background: rgba(10, 15, 30, 0.9);
+  border: 1px solid rgba(0, 255, 255, 0.3);
   border-radius: 16px;
   padding: 30px;
   max-width: 600px;
-  width: 100%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 0 40px rgba(0, 255, 255, 0.1),
+    inset 0 0 60px rgba(0, 255, 255, 0.02);
 }
 
-.file-header {
-  margin-bottom: 20px;
+.card-header {
   text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.file-icon-large {
+  font-size: 48px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.5));
 }
 
 .file-title {
-  font-size: 24px;
-  color: #333;
+  font-size: 20px;
+  color: #fff;
   word-break: break-all;
+  font-family: 'Courier New', monospace;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 .image-preview {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   border-radius: 12px;
   overflow: hidden;
-  background: #f5f5f5;
+  position: relative;
+  border: 1px solid rgba(0, 255, 255, 0.3);
 }
 
 .image-preview img {
@@ -80,80 +236,140 @@
   display: block;
 }
 
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+    linear-gradient(-135deg, rgba(0, 255, 0, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
 .text-preview {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   border-radius: 12px;
   overflow: hidden;
-  background: #f5f5f5;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  background: rgba(0, 20, 40, 0.5);
 }
 
 .text-preview iframe {
   width: 100%;
   height: 300px;
   border: none;
+  background: #0a0e17;
 }
 
 .file-details {
-  background: #f8f9fa;
-  border-radius: 12px;
+  background: rgba(0, 255, 255, 0.03);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  border-radius: 10px;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.detail-item {
+.detail-row {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid #e9ecef;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.1);
 }
 
-.detail-item:last-child {
+.detail-row:last-child {
   border-bottom: none;
 }
 
-.detail-item.description {
+.detail-row.description {
   flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
 }
 
-.detail-item .label {
-  color: #666;
-  font-weight: 500;
+.detail-label {
+  color: rgba(0, 255, 255, 0.7);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.detail-item .value {
-  color: #333;
+.detail-value {
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
   word-break: break-all;
 }
 
 .download-btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
-  padding: 15px;
-  background: #28a745;
-  color: white;
+  padding: 18px;
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 255, 0, 0.1));
+  border: 1px solid #0f0;
+  color: #0f0;
   text-decoration: none;
-  text-align: center;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
-  transition: background 0.2s;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
   box-sizing: border-box;
 }
 
 .download-btn:hover {
-  background: #218838;
+  background: linear-gradient(135deg, rgba(0, 255, 0, 0.3), rgba(0, 255, 0, 0.2));
+  box-shadow:
+    0 0 30px rgba(0, 255, 0, 0.4),
+    inset 0 0 20px rgba(0, 255, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.download-btn .btn-icon {
+  font-size: 20px;
+  transition: transform 0.3s;
+}
+
+.download-btn:hover .btn-icon {
+  transform: translateY(3px);
 }
 
 .upload-more {
   display: block;
   text-align: center;
-  margin-top: 15px;
-  color: #007bff;
+  margin-top: 20px;
+  color: rgba(0, 255, 255, 0.7);
   text-decoration: none;
-  font-weight: 500;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+  transition: color 0.3s;
 }
 
 .upload-more:hover {
-  text-decoration: underline;
+  color: #0ff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+@media (max-width: 600px) {
+  .preview-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .preview-card {
+    padding: 20px;
+  }
+
+  .file-title {
+    font-size: 16px;
+  }
 }

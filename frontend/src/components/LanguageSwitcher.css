@@ -1,0 +1,37 @@
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.6);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lang-btn:hover {
+  border-color: rgba(0, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.lang-btn.active {
+  background: rgba(0, 255, 255, 0.15);
+  border-color: #0ff;
+  color: #0ff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+.lang-divider {
+  color: rgba(0, 255, 255, 0.4);
+  font-family: 'Courier New', monospace;
+}

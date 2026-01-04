@@ -1,32 +1,51 @@
 import React, { useState } from 'react';
 import FileUploader from '../components/FileUploader';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 import type { UploadResponse } from '../api';
+import { useI18n } from '../i18n';
 import './Upload.css';
 
 const Upload: React.FC = () => {
+  const { t } = useI18n();
   const [lastUpload, setLastUpload] = useState<UploadResponse | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const handleUploadSuccess = (response: UploadResponse) => {
     setLastUpload(response);
+    setCopied(false);
   };
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    alert('Link copied to clipboard!');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <div className="upload-page">
+      <div className="cyber-grid"></div>
+      <div className="particles"></div>
+
       <header className="header">
-        <h1>File Share</h1>
-        <p>Upload files, images, or text and share via Telegram</p>
+        <div className="header-content">
+          <div className="logo-section">
+            <div className="logo-icon">⬡</div>
+            <h1 className="title">{t('title')}</h1>
+          </div>
+          <LanguageSwitcher />
+        </div>
+        <p className="subtitle">{t('subtitle')}</p>
+        <div className="header-line"></div>
       </header>
 
       <FileUploader onUploadSuccess={handleUploadSuccess} />
 
       {lastUpload && (
         <div className="upload-result">
-          <h3>Upload Successful!</h3>
+          <div className="result-header">
+            <span className="success-icon">✓</span>
+            <h3>{t('uploadSuccess')}</h3>
+          </div>
           <div className="result-info">
             <span className="filename">{lastUpload.filename}</span>
             <div className="share-link">
@@ -40,7 +59,7 @@ const Upload: React.FC = () => {
                 className="copy-btn"
                 onClick={() => copyToClipboard(lastUpload.share_url)}
               >
-                Copy
+                {copied ? t('copied') : t('copyLink')}
               </button>
             </div>
             <a
@@ -49,11 +68,16 @@ const Upload: React.FC = () => {
               rel="noopener noreferrer"
               className="view-link"
             >
-              Open Preview
+              {t('openPreview')}
+              <span className="arrow">→</span>
             </a>
           </div>
         </div>
       )}
+
+      <footer className="footer">
+        <span className="footer-text">// POWERED BY TELEGRAM BOT API</span>
+      </footer>
     </div>
   );
 };
