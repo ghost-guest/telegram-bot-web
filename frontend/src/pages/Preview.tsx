@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getFileInfo, getDownloadUrl, getPreviewUrl, FileInfo } from '../api';
+import { getFileInfo, getDownloadUrl, getPreviewUrl } from '../api';
+import type { FileInfo } from '../api';
 import './Preview.css';
 
 const Preview: React.FC = () => {

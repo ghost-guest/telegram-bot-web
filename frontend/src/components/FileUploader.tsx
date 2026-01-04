@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { uploadFile, uploadText, UploadResponse } from '../api';
+import { uploadFile, uploadText } from '../api';
+import type { UploadResponse } from '../api';
 import './FileUploader.css';
 
 interface FileUploaderProps {

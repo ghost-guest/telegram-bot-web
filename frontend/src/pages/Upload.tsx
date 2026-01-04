@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FileUploader from '../components/FileUploader';
-import { UploadResponse } from '../api';
+import type { UploadResponse } from '../api';
 import './Upload.css';
 
 const Upload: React.FC = () => {
